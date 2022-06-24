@@ -16,8 +16,9 @@ def main():
     app.config["DEBUG"] = True
     config = load_config()
     # loading the model
-    if os.path.isfile(config['model']['path']):
-        model = Model.load(config['model']['path'])
+    model_path = config['model']['path']
+    if os.path.isfile(model_path):
+        model = Model.load(None, path=model_path)
     # if there is no saved model, train the model
     else:
         model = train_full_model(config)

@@ -2,7 +2,7 @@ name: "iris"
 
 model:
     type: "logistic" #xgb or logistic
-    path: "model_directory/model.pkl"
+    path: "src/model_directory/model.pkl"
 
 training:
     random_seed: 42
