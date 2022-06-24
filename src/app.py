@@ -30,7 +30,7 @@ def main():
         # get the prediction
         iris_class = model.predict(x)
         # convert to name
-        class_name = model.target_names[iris_class]
+        class_name = model.target_names[int(iris_class)]
         # convert to json
         iris_jason = jsonify({"iris_class": class_name})
         return iris_jason

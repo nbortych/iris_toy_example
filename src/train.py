@@ -8,7 +8,8 @@ from utils import load_config
 
 
 def train(train_X: np.ndarray, train_y: np.ndarray, model_type: str = "xgb",
-          model_path: str = "model_directory/model.pkl", feature_names: list = (), target_names: dict = dict()) -> Model:
+          model_path: str = "model_directory/model.pkl", feature_names: list = (),
+          target_names: dict = dict()) -> Model:
     """Train and save the model.
     :param train_X: The features to train on.
     :param train_y: The labels to train on.
@@ -50,19 +51,16 @@ def train_full_model(config: dict) -> Model:
     dataset = Dataset()
     X, y = dataset.get_all_data_with_labels()
     model = train(X, y, model_type=config['model']['type'],
-                  model_path=config['model']['path'])
+                  model_path=config['model']['path'], feature_names=dataset.feature_names,
+                  target_names=dataset.target_names)
     return model
-
-
-def set_seed(seed):
-    np.random.seed(seed)
 
 
 def main():
     """Train and evaluate the model."""
     # load config
     config = load_config()
-    set_seed(config['training']['random_seed'])
+    np.random.seed(config['training']['random_seed'])
     # getting the data
     dataset = Dataset()
     train_X, train_y, val_X, val_y = dataset.get_train_val_data_with_labels(
